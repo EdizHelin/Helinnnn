@@ -151,6 +151,17 @@
             animation: pulseGlow 3s infinite;
         }
 
+        /* Love Languages Cards */
+        @keyframes cardIn {
+            0% { opacity: 0; transform: translateY(16px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .lang-card {
+            opacity: 0;
+            animation: cardIn 0.5s ease forwards;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a2540; }
@@ -220,6 +231,13 @@
                 <a href="#quiz-section" class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-sunflower font-medium transition-all flex items-center gap-2">
                     <i class="fa-solid fa-heart"></i> Sürpriz Quiz
                 </a>
+            </div>
+
+            <!-- "Seni seviyorum" in 50 languages button -->
+            <div class="pt-2">
+                <button onclick="openLoveLanguages()" class="px-6 py-3.5 rounded-full bg-gradient-to-r from-pink-500 to-sunflower text-white font-bold shadow-lg hover:brightness-110 hover:scale-105 active:scale-95 transition-all text-sm sm:text-base">
+                    💌 Seni Çok Seviyorum. Peki bunu nasıl söyleyebilirim? 🌍
+                </button>
             </div>
         </section>
 
@@ -364,107 +382,116 @@
                 </h2>
                 <p class="text-xs text-ocean-light">Sudokuya bayıldığını bildiğim için sana özel 9x9 minik bir bulmaca hazırladım! Eksik rakamları doldur ve sürprizi gör.</p>
             </div>
-
-                       <!-- 9x9 Grid -->
-            <div class="grid grid-cols-9 gap-1 max-w-[420px] mx-auto p-3 bg-ocean-deep/80 rounded-2xl border border-white/20">
-                <!-- Row 1 -->
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">5</div>
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">3</div>
-                <input id="sudoku-0-2" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <input id="sudoku-0-3" type="number" min="1" max="9" placeholder="?" data-answer="6" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">7</div>
-                <input id="sudoku-0-5" type="number" min="1" max="9" placeholder="?" data-answer="8" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <input id="sudoku-0-6" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-0-7" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-0-8" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-
-                <!-- Row 2 -->
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">6</div>
-                <input id="sudoku-1-1" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-1-2" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">1</div>
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">9</div>
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mr-1">5</div>
-                <input id="sudoku-1-6" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-1-7" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-1-8" type="number" min="1" max="9" placeholder="?" data-answer="8" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-
-                <!-- Row 3 -->
-                <input id="sudoku-2-0" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mb-1">9</div>
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mr-1 mb-1">8</div>
-                <input id="sudoku-2-3" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-                <input id="sudoku-2-4" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-                <input id="sudoku-2-5" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1 mb-1">
-                <input id="sudoku-2-6" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mb-1">6</div>
-                <input id="sudoku-2-8" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-
-                <!-- Row 4 -->
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">8</div>
-                <input id="sudoku-3-1" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-3-2" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <input id="sudoku-3-3" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">6</div>
-                <input id="sudoku-3-5" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <input id="sudoku-3-6" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-3-7" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">3</div>
-
-                <!-- Row 5 -->
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">4</div>
-                <input id="sudoku-4-1" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-4-2" type="number" min="1" max="9" placeholder="?" data-answer="6" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">8</div>
-                <input id="sudoku-4-4" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mr-1">3</div>
-                <input id="sudoku-4-6" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-4-7" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">1</div>
-
-                <!-- Row 6 -->
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mb-1">7</div>
-                <input id="sudoku-5-1" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-                <input id="sudoku-5-2" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1 mb-1">
-                <input id="sudoku-5-3" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mb-1">2</div>
-                <input id="sudoku-5-5" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1 mb-1">
-                <input id="sudoku-5-6" type="number" min="1" max="9" placeholder="?" data-answer="8" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-                <input id="sudoku-5-7" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mb-1">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mb-1">6</div>
-
-                <!-- Row 7 -->
-                <input id="sudoku-6-0" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">6</div>
-                <input id="sudoku-6-2" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <input id="sudoku-6-3" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-6-4" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-6-5" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">2</div>
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">8</div>
-                <input id="sudoku-6-8" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-
-                <!-- Row 8 -->
-                <input id="sudoku-7-0" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-7-1" type="number" min="1" max="9" placeholder="?" data-answer="8" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-7-2" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">4</div>
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">1</div>
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower mr-1">9</div>
-                <input id="sudoku-7-6" type="number" min="1" max="9" placeholder="?" data-answer="6" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-7-7" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">5</div>
-
-                <!-- Row 9 -->
-                <input id="sudoku-8-0" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-8-1" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <input id="sudoku-8-2" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <input id="sudoku-8-3" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">8</div>
-                <input id="sudoku-8-5" type="number" min="1" max="9" placeholder="?" data-answer="6" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20 mr-1">
-                <input id="sudoku-8-6" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 rounded-lg bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:border-sunflower border border-white/20">
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">7</div>
-                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center font-bold text-base text-sunflower">9</div>
+            <!-- 9x9 Grid (3x3'lük 9 kutu, çizgilerle ayrılmış) -->
+            <div class="grid grid-cols-3 gap-1 p-1 w-fit mx-auto bg-sunflower/60 rounded-2xl overflow-hidden border border-white/20">
+                <!-- Kutu 1 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">5</div>
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">3</div>
+                    <input id="sudoku-0-2" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">6</div>
+                    <input id="sudoku-1-1" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-1-2" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-2-0" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">9</div>
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">8</div>
+                </div>
+                <!-- Kutu 2 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <input id="sudoku-0-3" type="number" min="1" max="9" placeholder="?" data-answer="6" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">7</div>
+                    <input id="sudoku-0-5" type="number" min="1" max="9" placeholder="?" data-answer="8" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">1</div>
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">9</div>
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">5</div>
+                    <input id="sudoku-2-3" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-2-4" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-2-5" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                </div>
+                <!-- Kutu 3 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <input id="sudoku-0-6" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-0-7" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-0-8" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-1-6" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-1-7" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-1-8" type="number" min="1" max="9" placeholder="?" data-answer="8" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-2-6" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">6</div>
+                    <input id="sudoku-2-8" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                </div>
+                <!-- Kutu 4 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">8</div>
+                    <input id="sudoku-3-1" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-3-2" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">4</div>
+                    <input id="sudoku-4-1" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-4-2" type="number" min="1" max="9" placeholder="?" data-answer="6" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">7</div>
+                    <input id="sudoku-5-1" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-5-2" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                </div>
+                <!-- Kutu 5 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <input id="sudoku-3-3" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">6</div>
+                    <input id="sudoku-3-5" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">8</div>
+                    <input id="sudoku-4-4" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">3</div>
+                    <input id="sudoku-5-3" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">2</div>
+                    <input id="sudoku-5-5" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                </div>
+                <!-- Kutu 6 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <input id="sudoku-3-6" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-3-7" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">3</div>
+                    <input id="sudoku-4-6" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-4-7" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">1</div>
+                    <input id="sudoku-5-6" type="number" min="1" max="9" placeholder="?" data-answer="8" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-5-7" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">6</div>
+                </div>
+                <!-- Kutu 7 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <input id="sudoku-6-0" type="number" min="1" max="9" placeholder="?" data-answer="9" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">6</div>
+                    <input id="sudoku-6-2" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-7-0" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-7-1" type="number" min="1" max="9" placeholder="?" data-answer="8" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-7-2" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-8-0" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-8-1" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-8-2" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                </div>
+                <!-- Kutu 8 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <input id="sudoku-6-3" type="number" min="1" max="9" placeholder="?" data-answer="5" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-6-4" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-6-5" type="number" min="1" max="9" placeholder="?" data-answer="7" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">4</div>
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">1</div>
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">9</div>
+                    <input id="sudoku-8-3" type="number" min="1" max="9" placeholder="?" data-answer="2" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">8</div>
+                    <input id="sudoku-8-5" type="number" min="1" max="9" placeholder="?" data-answer="6" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                </div>
+                <!-- Kutu 9 -->
+                <div class="grid grid-cols-3 gap-px bg-white/30">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">2</div>
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">8</div>
+                    <input id="sudoku-6-8" type="number" min="1" max="9" placeholder="?" data-answer="4" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-7-6" type="number" min="1" max="9" placeholder="?" data-answer="6" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <input id="sudoku-7-7" type="number" min="1" max="9" placeholder="?" data-answer="3" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">5</div>
+                    <input id="sudoku-8-6" type="number" min="1" max="9" placeholder="?" data-answer="1" class="w-9 h-9 bg-ocean-navy text-center font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sunflower">
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">7</div>
+                    <div class="w-9 h-9 bg-ocean-deep flex items-center justify-center font-bold text-base text-sunflower">9</div>
+                </div>
             </div>
 
             <div class="text-center pt-5">
@@ -477,28 +504,6 @@
                 <p class="font-serif font-bold text-sunflower text-base">🎉 HARİKASIN! TEBRİKLER!</p>
                 <p class="text-xs text-white">Bu Sudoku'yu da çözdün bebeğimmmm. Bana ilk kez Sudoku'yu öğretmeye çalıştığın zamanı hatırlıyorum. Seni asla yenemeyeceğim çünkü harika bir hocasın ve bana bile öğrettin. Seni seviyorummm. Her şeyden çok ❤️</p>
             </div>
-
-            <script>
-                function checkSudokuSolution() {
-                    const inputs = document.querySelectorAll('input[id^="sudoku-"]');
-                    const result = document.getElementById('sudoku-result');
-                    let allCorrect = true;
-
-                    inputs.forEach(function (input) {
-                        const isCorrect = input.value.trim() === input.dataset.answer;
-                        input.classList.toggle('border-red-400', !isCorrect);
-                        input.classList.toggle('border-white/20', isCorrect);
-                        if (!isCorrect) allCorrect = false;
-                    });
-
-                    if (allCorrect) {
-                        result.classList.remove('hidden');
-                        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    } else {
-                        result.classList.add('hidden');
-                    }
-                }
-            </script>
         </section>
 
         <!-- SPECIAL MILESTONES & MEMORIES GALERY -->
@@ -616,6 +621,36 @@
 
     </main>
 
+    <!-- LOVE IN 50 LANGUAGES (FULL-SCREEN PAGE) -->
+    <div id="love-modal" class="fixed inset-0 z-[60] hidden overflow-y-auto bg-gradient-to-br from-[#06192a] via-ocean-deep to-[#004b76]">
+        <div class="sticky top-0 z-10 glass-card border-b border-white/10 px-4 py-3 md:px-8">
+            <div class="max-w-6xl mx-auto flex justify-between items-center">
+                <span class="font-serif font-bold text-base md:text-lg text-gradient-gold">🌍 50 Dilde Aşkım</span>
+                <button onclick="closeLoveLanguages()" class="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-sm flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-xmark"></i> Kapat
+                </button>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 py-10 space-y-10">
+            <div class="text-center space-y-4">
+                <div class="text-5xl animate-bounce">💌</div>
+                <h2 class="text-3xl sm:text-5xl font-serif font-bold text-gradient-gold leading-tight">
+                    Seni Seviyorum Helin 🌻
+                </h2>
+                <p class="text-sm sm:text-base text-ocean-light max-w-2xl mx-auto leading-relaxed">
+                    Dünyada en çok konuşulan 50 dilde sana söylüyorum: <span class="text-sunflower font-semibold">"Seni Seviyorum Helin. Çirkin'in Sana Çok Aşık."</span> ❤️
+                </p>
+            </div>
+
+            <div id="love-languages-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+            <p class="text-center text-xs text-ocean-light pb-8">
+                Hangi dilde söylersem söyleyeyim, cevap hep aynı: Sen. 🌍❤️
+            </p>
+        </div>
+    </div>
+
     <!-- EDIT MODAL (CUSTOMIZATION) -->
     <div id="edit-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="glass-card max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 space-y-6 border-sunflower/30">
@@ -708,6 +743,61 @@
             { id: 5, text: "Pazar sabahları kahve eşliğinde zorlu Sudokular çözmek", checked: false }
         ];
 
+        /* "Seni Seviyorum Helin. Çirkin'in Sana Çok Aşık." — 50 dilde
+           Her satır: [bayrak, dilin adı, metin, sağdan sola mı?] */
+        const loveLanguages = [
+            ['🇬🇧', 'İngilizce', "I love you, Helin. Your Çirkin is so in love with you."],
+            ['🇨🇳', 'Mandarin Çincesi', "我爱你，Helin。你的 Çirkin 深深地爱着你。"],
+            ['🇪🇸', 'İspanyolca', "Te quiero, Helin. Tu Çirkin está muy enamorado de ti."],
+            ['🇮🇳', 'Hintçe', "मैं तुमसे प्यार करता हूँ, Helin। तुम्हारा Çirkin तुम्हारे प्यार में पूरी तरह डूबा है।"],
+            ['🇸🇦', 'Arapça', "أحبكِ يا Helin. Çirkin الخاص بكِ واقع في حبكِ جدًا.", true],
+            ['🇫🇷', 'Fransızca', "Je t'aime, Helin. Ton Çirkin est éperdument amoureux de toi."],
+            ['🇧🇩', 'Bengalce', "আমি তোমাকে ভালোবাসি, Helin। তোমার Çirkin তোমার প্রেমে পাগল।"],
+            ['🇧🇷', 'Portekizce', "Eu te amo, Helin. O seu Çirkin está muito apaixonado por você."],
+            ['🇷🇺', 'Rusça', "Я люблю тебя, Helin. Твой Çirkin безумно в тебя влюблён."],
+            ['🇵🇰', 'Urduca', "میں تم سے محبت کرتا ہوں، Helin۔ تمہارا Çirkin تم سے بے حد محبت کرتا ہے۔", true],
+            ['🇮🇩', 'Endonezce', "Aku cinta kamu, Helin. Çirkin-mu sangat jatuh cinta padamu."],
+            ['🇩🇪', 'Almanca', "Ich liebe dich, Helin. Dein Çirkin ist unsterblich in dich verliebt."],
+            ['🇯🇵', 'Japonca', "愛してるよ、Helin。君の Çirkin は君にメロメロだよ。"],
+            ['🇰🇪', 'Svahili', "Nakupenda, Helin. Çirkin wako ana mapenzi makubwa sana kwako."],
+            ['🇮🇳', 'Marathi', "मी तुझ्यावर प्रेम करतो, Helin. तुझा Çirkin तुझ्या प्रेमात वेडा झाला आहे."],
+            ['🇮🇳', 'Telugu', "నేను నిన్ను ప్రేమిస్తున్నాను, Helin. నీ Çirkin నీ ప్రేమలో పూర్తిగా మునిగిపోయాడు."],
+            ['🇮🇳', 'Tamilce', "நான் உன்னை காதலிக்கிறேன், Helin. உன் Çirkin உன் காதலில் மூழ்கிவிட்டான்."],
+            ['🇭🇰', 'Kantonca', "我愛你，Helin。你嘅 Çirkin 好鍾意你。"],
+            ['🇻🇳', 'Vietnamca', "Anh yêu em, Helin. Çirkin của em đang yêu em say đắm."],
+            ['🇰🇷', 'Korece', "사랑해, Helin. 너의 Çirkin은 너에게 푹 빠졌어."],
+            ['🇮🇹', 'İtalyanca', "Ti amo, Helin. Il tuo Çirkin è perdutamente innamorato di te."],
+            ['🇹🇭', 'Tayca', "ฉันรักเธอ Helin Çirkin ของเธอหลงรักเธอหมดหัวใจ"],
+            ['🇮🇳', 'Gujarati', "હું તને પ્રેમ કરું છું, Helin. તારો Çirkin તારા પ્રેમમાં પાગલ છે."],
+            ['🇮🇷', 'Farsça', "دوستت دارم، Helin. Çirkin تو دیوانهٔ توست.", true],
+            ['🇵🇱', 'Lehçe', "Kocham cię, Helin. Twój Çirkin jest w tobie szaleńczo zakochany."],
+            ['🇺🇦', 'Ukraynaca', "Я кохаю тебе, Helin. Твій Çirkin шалено в тебе закоханий."],
+            ['🇲🇾', 'Malayca', "Saya cintakan awak, Helin. Çirkin awak sangat jatuh cinta pada awak."],
+            ['🇮🇳', 'Pencapça', "ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ, Helin। ਤੇਰਾ Çirkin ਤੇਰੇ ਪਿਆਰ ਵਿੱਚ ਪਾਗਲ ਹੈ।"],
+            ['🇮🇳', 'Kannada', "ನಾನು ನಿನ್ನನ್ನು ಪ್ರೀತಿಸುತ್ತೇನೆ, Helin. ನಿನ್ನ Çirkin ನಿನ್ನ ಪ್ರೀತಿಯಲ್ಲಿ ಮುಳುಗಿಹೋಗಿದ್ದಾನೆ."],
+            ['🇮🇳', 'Malayalam', "ഞാൻ നിന്നെ സ്നേഹിക്കുന്നു, Helin. നിന്റെ Çirkin നിന്നെ അതിയായി പ്രണയിക്കുന്നു."],
+            ['🇳🇱', 'Felemenkçe', "Ik hou van je, Helin. Je Çirkin is smoorverliefd op jou."],
+            ['🇷🇴', 'Romence', "Te iubesc, Helin. Çirkin al tău este nebunește de îndrăgostit de tine."],
+            ['🇬🇷', 'Yunanca', "Σ' αγαπώ, Helin. Ο Çirkin σου είναι τρελά ερωτευμένος μαζί σου."],
+            ['🇨🇿', 'Çekçe', "Miluji tě, Helin. Tvůj Çirkin je do tebe šíleně zamilovaný."],
+            ['🇸🇪', 'İsveççe', "Jag älskar dig, Helin. Din Çirkin är helt förälskad i dig."],
+            ['🇭🇺', 'Macarca', "Szeretlek, Helin. A te Çirkinod őrülten szerelmes beléd."],
+            ['🇮🇱', 'İbranice', "אני אוהב אותך, Helin. ה־Çirkin שלך מאוהב בך מאוד.", true],
+            ['🇫🇮', 'Fince', "Rakastan sinua, Helin. Çirkin on päätäpahkaa rakastunut sinuun."],
+            ['🇩🇰', 'Danca', "Jeg elsker dig, Helin. Din Çirkin er helt vildt forelsket i dig."],
+            ['🇳🇴', 'Norveççe', "Jeg elsker deg, Helin. Din Çirkin er helt forelsket i deg."],
+            ['🇧🇬', 'Bulgarca', "Обичам те, Helin. Твоят Çirkin е лудо влюбен в теб."],
+            ['🇷🇸', 'Sırpça', "Volim te, Helin. Tvoj Çirkin je do ušiju zaljubljen u tebe."],
+            ['🇵🇭', 'Filipince', "Mahal kita, Helin. Ang iyong Çirkin ay baliw na baliw sa pag-ibig sa iyo."],
+            ['🇳🇬', 'Hausaca', "Ina son ki, Helin. Çirkin naki yana matuƙar son ki."],
+            ['🇳🇬', 'Yorubaca', "Mo nífẹ̀ẹ́ rẹ, Helin. Çirkin rẹ nífẹ̀ẹ́ rẹ gidigidi."],
+            ['🇪🇹', 'Amharca', "እወድሻለሁ Helin። Çirkin ያንቺ በጣም ይወድሻል።"],
+            ['🇳🇵', 'Nepalce', "म तिमीलाई माया गर्छु, Helin। तिम्रो Çirkin तिमीसँग धेरै प्रेममा छ।"],
+            ['🇱🇰', 'Sinhala', "මම ඔයාට ආදරෙයි, Helin. ඔයාගේ Çirkin ඔයාට ගොඩක් ආදරෙයි."],
+            ['🇺🇿', 'Özbekçe', "Men seni sevaman, Helin. Sening Çirkining senga qattiq oshiq."],
+            ['🇦🇿', 'Azerice', "Səni sevirəm, Helin. Çirkinin sənə çox aşiqdir."]
+        ];
+
         let memories = [...defaultMemories];
 
         /* ==========================================
@@ -786,24 +876,73 @@
             }
         }
 
+        // 9x9 Sudoku kontrolü: her kutudaki data-answer ile karşılaştırılır
         function checkSudokuSolution() {
-            // Expected answers: sudoku-0-2 = 3, sudoku-1-0 = 3, sudoku-1-3 = 2, sudoku-2-1 = 1, sudoku-3-2 = 4
-            const val1 = document.getElementById('sudoku-0-2').value;
-            const val2 = document.getElementById('sudoku-1-0').value;
-            const val3 = document.getElementById('sudoku-1-3').value;
-            const val4 = document.getElementById('sudoku-2-1').value;
-            const val5 = document.getElementById('sudoku-3-2').value;
+            const inputs = document.querySelectorAll('input[id^="sudoku-"]');
+            const result = document.getElementById('sudoku-result');
+            let allCorrect = true;
 
-            if (val1 == '3' && val2 == '3' && val3 == '2' && val4 == '1' && val5 == '4') {
-                document.getElementById('sudoku-result').classList.remove('hidden');
+            inputs.forEach(function (input) {
+                const isCorrect = input.value.trim() === input.dataset.answer;
+                input.classList.toggle('ring-2', !isCorrect);
+                input.classList.toggle('ring-inset', !isCorrect);
+                input.classList.toggle('ring-red-400', !isCorrect);
+                if (!isCorrect) allCorrect = false;
+            });
+
+            if (allCorrect) {
+                result.classList.remove('hidden');
                 confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 } });
+                result.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else {
-                alert("Ufak bir yanlışlık var gibi kraliçem! Bir daha göz at istersen 🧩❤️");
+                result.classList.add('hidden');
+                alert("Ufak bir yanlışlık var gibi kraliçem! Kırmızı çerçeveli kutulara bir daha göz at istersen 🧩❤️");
             }
         }
 
         /* ==========================================
-           4. RENDER FUNCTIONS & INITIALIZATION
+           4. "SENİ SEVİYORUM" 50 DİL SAYFASI
+           ========================================== */
+        function renderLoveLanguages() {
+            const grid = document.getElementById('love-languages-grid');
+            if (grid.childElementCount) return;
+
+            loveLanguages.forEach(function (item, i) {
+                const flag = item[0], name = item[1], text = item[2], rtl = item[3];
+                const card = document.createElement('div');
+                card.className = 'lang-card glass-card glass-card-hover rounded-2xl p-5 flex flex-col gap-3 border-white/10';
+                card.style.animationDelay = (i * 40) + 'ms';
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-sunflower">${flag} ${name}</span>
+                        <span class="text-xs text-ocean-light">#${i + 1}</span>
+                    </div>
+                    <p class="text-base leading-relaxed text-white font-serif ${rtl ? 'text-right' : ''}" ${rtl ? 'dir="rtl"' : ''}>${text}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openLoveLanguages() {
+            renderLoveLanguages();
+            const modal = document.getElementById('love-modal');
+            modal.classList.remove('hidden');
+            modal.scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+            confetti({ particleCount: 90, spread: 80, origin: { y: 0.3 }, colors: ['#ffb703', '#ff0055', '#2a9d8f', '#ffffff'] });
+        }
+
+        function closeLoveLanguages() {
+            document.getElementById('love-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLoveLanguages();
+        });
+
+        /* ==========================================
+           5. RENDER FUNCTIONS & INITIALIZATION
            ========================================== */
         function renderMemories() {
             const container = document.getElementById('memory-cards-container');
