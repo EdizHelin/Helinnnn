@@ -186,7 +186,7 @@
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <span class="text-2xl animate-spin" style="animation-duration: 12s;">🌻</span>
-                <span class="font-serif font-bold text-lg md:text-xl text-gradient-gold">Helin & Ben</span>
+                <span class="font-serif font-bold text-lg md:text-xl text-gradient-gold">Helin & Eziko</span>
             </div>
             
             <div class="flex items-center gap-3">
@@ -566,7 +566,7 @@
                     </div>
                     <div class="text-left">
                         <h3 class="font-serif font-bold text-white text-base">Bizim Şarkı Listemiz</h3>
-                        <p class="text-xs text-ocean-light">Helin & Ben • Özel Çalma Listesi</p>
+                        <p class="text-xs text-ocean-light">Helin & Eziko • Özel Çalma Listesi</p>
                     </div>
                 </div>
                 <span class="text-xs bg-leaf/20 text-leaf-light px-2.5 py-1 rounded-full border border-leaf/30">Romantik Mod</span>
@@ -612,7 +612,7 @@
         <!-- FOOTER LOVE MESSAGE -->
         <footer class="text-center space-y-4 py-8 border-t border-white/10">
             <p class="font-serif italic text-lg text-sunflower">
-                "COP sahnesinde dünyayı değiştiren cesaretin, gözlerindeki ışık ve kalbindeki iyilikle sen benim her şeyimsin..."
+                "Seninle beraber her şeyi yapmak istiyorum. Her buluşmalarımızı not etmek, hediyeleşmeye devam etmek, yanında olmak ve seninle Dünya'yı gezmek ve diğer her şey. Benim her şeyimsin."
             </p>
             <p class="text-xs text-ocean-light">
                 Bu site, dünyadaki en harika sevgili <strong class="text-white">Helin</strong> için sonsuz sevgiyle kodlandı. 🌻❤️🐠
@@ -727,21 +727,22 @@
         ];
 
         const secretNotes = [
-            "Gülüşün, ayçiçeklerinin güneşe döndüğü gibi içimi aydınlatıyor. ✨🌻",
+            "Seninle 7. ayımıza gireceğim sevgilim. Tanışmamızdan önce; seninle tanışmadığım, seninle konuşmadığım zamanların nasıl geçtiğini bilmiyorum. Başıma gelen en güzel şey seninle tanışmış olmam. Bu kadar şanslı olduğum için çok mutluyum ve gerçekten şükrediyorum. İyi ki varsın ve iyi ki seninleyim <3",
             "COP konferansındaki o konuşmanı dinlerken gururdan gözlerim dolacak, eminim!",
-            "TEGV'de çocuklara verdiklerin, kadın sağlığı için mücadeleden hiç vazgeçmeyişin... Seni sevmek harika bir duygu.",
+            "Günün en heyecanla beklediğim vakti, seninle beraber olduğum vakit",
             "Sudoku çözerken takındığın o tatlı odaklanmış bakışına bayılıyorum!",
-            "Denizdeki balıklar kadar özgür, ayçiçekleri kadar canlı ve neşelisin.",
+            "Sana her alanda inanıyorum hayatım. Her şeyi başarabileceğini biliyorum ve sana her zaman yardımcı olmak istiyorum ve her zaman yanında olacağım",
             "İyi ki 1 Nisan'da o ilk adımı attık, iyi ki hayatımdasın benim ilham kaynağım!"
         ];
 
-        const bucketListItems = [
-            { id: 1, text: "COP Konferansı konuşmandan sonra sana sarılıp tebrik etmek", checked: false },
-            { id: 2, text: "Birlikte dev bir akvaryum / deniz canlıları müzesi gezmek", checked: true },
-            { id: 3, text: "Ayçiçeği tarlalarının ortasında gün batımında fotoğraf çekilmek", checked: false },
-            { id: 4, text: "Gözlerden uzak bir koyda balıklarla birlikte yüzmek", checked: true },
-            { id: 5, text: "Pazar sabahları kahve eşliğinde zorlu Sudokular çözmek", checked: false }
-        ];
+       const bucketListItems = [
+    { id: 1, text: "COP Konferansı konuşmandan sonra sana sarılıp tebrik etmek", checked: false },
+    { id: 2, text: "Birlikte araba yolculuğu yapmak", checked: true },
+    { id: 3, text: "Ayçiçeği tarlalarının ortasında gün batımında fotoğraf çekilmek", checked: false },
+    { id: 4, text: "Gözlerden uzak bir koyda balıklarla birlikte yüzmek", checked: true },
+    { id: 5, text: "Pazar sabahları kahve eşliğinde zorlu Sudokular çözmek", checked: false },
+    { id: 6, text: "Beraber kamp yapmak.", checked: false }
+];
 
         /* "Seni Seviyorum Helin. Çirkin'in Sana Çok Aşık." — 50 dilde
            Her satır: [bayrak, dilin adı, metin, sağdan sola mı?] */
@@ -1000,25 +1001,22 @@
             });
         }
 
-        let lastNoteIndex = -1;
-        function revealRandomNote() {
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * secretNotes.length);
-            } while (randomIndex === lastNoteIndex && secretNotes.length > 1);
+    let noteIndex = 0;
+function revealRandomNote() {
+    const idx = noteIndex;
+    noteIndex = (noteIndex + 1) % secretNotes.length;
 
-            lastNoteIndex = randomIndex;
-            const noteBox = document.getElementById('secret-note-box');
-            const noteText = document.getElementById('secret-note-text');
+    const noteBox = document.getElementById('secret-note-box');
+    const noteText = document.getElementById('secret-note-text');
 
-            noteBox.classList.add('opacity-0', 'scale-95');
+    noteBox.classList.add('opacity-0', 'scale-95');
 
-            setTimeout(() => {
-                noteText.innerText = `"${secretNotes[randomIndex]}"`;
-                noteBox.classList.remove('opacity-0', 'scale-95');
-                noteBox.classList.add('opacity-100', 'scale-100');
-            }, 200);
-        }
+    setTimeout(() => {
+        noteText.innerText = `"${secretNotes[idx]}"`;
+        noteBox.classList.remove('opacity-0', 'scale-95');
+        noteBox.classList.add('opacity-100', 'scale-100');
+    }, 200);
+}
 
         const audio = document.getElementById('audio-player');
         let isPlaying = false;
