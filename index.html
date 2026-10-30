@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dünya'nın En Harika Sevgilisi, Helin'im ❤️</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library for Correct Answer Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            deep: '#0a2540',
+                            navy: '#0077b6',
+                            bright: '#00b4d8',
+                            light: '#90e0ef',
+                            soft: '#e0f7fa'
+                        },
+                        sunflower: {
+                            DEFAULT: '#ffb703',
+                            gold: '#fb8500',
+                            light: '#ffea00'
+                        },
+                        sunshine: {
+                            DEFAULT: '#e9d8a6',
+                            bright: '#f4a261',
+                            gold: '#ee9b00'
+                        },
+                        leaf: {
+                            DEFAULT: '#2a9d8f',
+                            light: '#a7c957',
+                            soft: '#e9f5ed'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS Custom Styles & Glassmorphic Effects */
+        body {
+            background: linear-gradient(135deg, #06192a 0%, #0a2540 40%, #004b76 75%, #0077b6 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(10, 37, 64, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(255, 183, 3, 0.4);
+            box-shadow: 0 15px 35px 0 rgba(0, 180, 216, 0.25);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #ffea00 0%, #ffb703 50%, #f4a261 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-ocean {
+            background: linear-gradient(135deg, #90e0ef 0%, #00b4d8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Swimming Fish Animation */
+        .swimming-fish {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.65;
+            animation: swimHorizontal linear infinite;
+        }
+
+        @keyframes swimHorizontal {
+            0% {
+                transform: translateX(-10vw) translateY(0px) scaleX(1);
+            }
+            50% {
+                transform: translateX(50vw) translateY(-25px) scaleX(1);
+            }
+            51% {
+                transform: translateX(50vw) translateY(-25px) scaleX(-1);
+            }
+            100% {
+                transform: translateX(110vw) translateY(0px) scaleX(-1);
+            }
+        }
+
+        /* Floating Hearts Particles */
+        .heart-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 8s linear infinite;
+            opacity: 0;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Pulse glow animation */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 183, 3, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(255, 183, 3, 0.6); }
+        }
+
+        .glow-effect {
+            animation: pulseGlow 3s infinite;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a2540; }
+        ::-webkit-scrollbar-thumb { background: #0077b6; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2a9d8f; }
+    </style>
+</head>
+<body class="relative selection:bg-sunflower selection:text-ocean-deep">
+
+    <!-- Floating Background Particles (Hearts & Sunflowers) -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- Swimming Fish Layer -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="swimming-fish text-2xl text-ocean-bright" style="top: 20%; animation-duration: 22s; animation-delay: 0s;">🐠</div>
+        <div class="swimming-fish text-xl text-sunflower" style="top: 45%; animation-duration: 28s; animation-delay: 5s;">🐟</div>
+        <div class="swimming-fish text-3xl text-leaf-light" style="top: 75%; animation-duration: 25s; animation-delay: 10s;">🐡</div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 glass-card border-b border-white/10 px-4 py-3 md:px-8">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl animate-spin" style="animation-duration: 12s;">🌻</span>
+                <span class="font-serif font-bold text-lg md:text-xl text-gradient-gold">Helin & Ben</span>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <!-- Music Control Button -->
+                <button id="bg-music-toggle" onclick="toggleAudio()" class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs md:text-sm flex items-center gap-2 transition-all">
+                    <i id="music-icon" class="fa-solid fa-music text-sunflower"></i>
+                    <span id="music-text">Müziği Başlat</span>
+                </button>
+                <!-- Customization Modal Toggle -->
+                <button onclick="openEditModal()" class="px-3 py-1.5 rounded-full bg-leaf/20 hover:bg-leaf/40 border border-leaf/40 text-leaf-light text-xs md:text-sm flex items-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span class="hidden sm:inline">Düzenle</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 py-8 space-y-16 md:space-y-24">
+
+        <!-- HERO SECTION -->
+        <section class="text-center pt-8 md:pt-12 space-y-6">
+            <div class="inline-block px-4 py-1.5 rounded-full bg-sunflower/10 border border-sunflower/30 text-sunflower text-xs md:text-sm font-medium tracking-wide mb-2 animate-bounce">
+                🌻 Değişim Elçim, İlham Kaynağım, Helin'im 🌊
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-serif font-bold leading-tight text-gradient-gold drop-shadow-md">
+                Dünya'nın En Harika Sevgilisi,<br/>Helin'im ❤️
+            </h1>
+            
+            <p class="text-base sm:text-lg md:text-xl text-ocean-light max-w-2xl mx-auto font-light leading-relaxed">
+                "Hem dünyayı güzelleştiren cesur bir değişim elçisi, hem de kalbimin en tatlı sahibi. Seninle her an gurur duyuyorum..."
+            </p>
+
+            <div class="pt-4 flex flex-wrap justify-center gap-4">
+                <a href="#activism" class="px-6 py-3 rounded-full bg-gradient-to-r from-sunflower to-sunflower-gold text-ocean-deep font-bold shadow-lg hover:brightness-110 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-earth-americas"></i> Değişim Elçim
+                </a>
+                <a href="#time-counter" class="px-6 py-3 rounded-full bg-gradient-to-r from-ocean-bright to-ocean-navy text-white font-medium shadow-lg hover:shadow-ocean-bright/40 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-clock"></i> Zaman Sayacımız
+                </a>
+                <a href="#quiz-section" class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-sunflower font-medium transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-heart"></i> Sürpriz Quiz
+                </a>
+            </div>
+        </section>
+
+        <!-- ACTIVISM & HEROINE SECTION (DEĞİŞİM ELÇİSİ & GURUR KÖŞESİ) -->
+        <section id="activism" class="glass-card rounded-3xl p-6 sm:p-10 relative overflow-hidden border-sunflower/30">
+            <div class="absolute -top-12 -left-12 w-48 h-48 bg-sunflower/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                    <div>
+                        <span class="text-sunflower text-xs font-semibold tracking-widest uppercase">Benim İlham Kaynağım</span>
+                        <h2 class="text-2xl sm:text-4xl font-serif font-bold text-white flex items-center gap-2 mt-1">
+                            Değişim Elçim Helin ✨ 🌍
+                        </h2>
+                    </div>
+                    <span class="px-4 py-1.5 rounded-full bg-leaf/20 border border-leaf/40 text-leaf-light text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-seedling"></i> İklim & Kadın Sağlığı Savunucusu
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- COP Banner Card -->
+                    <div class="glass-card p-5 rounded-2xl border-sunflower/20 flex flex-col justify-between space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-sunflower/20 flex items-center justify-center text-sunflower text-xl">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-lg text-sunflower">COP Konferansı Konuşmacısı 🎙️</h3>
+                            <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+                                Küresel iklim krizine karşı sesini uluslararası sahnede, COP konferansında duyuracak kadar cesur ve yetenekli! Seninle sonsuz gurur duyuyorum.
+                            </p>
+                        </div>
+                        <span class="text-[10px] text-ocean-light italic">#ClimateAction #YouthLeader</span>
+                    </div>
+
+                    <!-- TEGV & Volunteer -->
+                    <div class="glass-card p-5 rounded-2xl border-leaf/20 flex flex-col justify-between space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-leaf/20 flex items-center justify-center text-leaf-light text-xl">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-lg text-leaf-light">TEGV Gönüllüsü & Kadın Sağlığı 💚</h3>
+                            <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+                                Çocukların geleceğine dokunan, kadın sağlığı ve eşitlik için yorulmadan mücadele eden altın gibi bir kalp...
+                            </p>
+                        </div>
+                        <span class="text-[10px] text-ocean-light italic">#TEGV #KadınSağlığı #Gönüllülük</span>
+                    </div>
+
+                    <!-- Ocean & Sunflowers Love -->
+                    <div class="glass-card p-5 rounded-2xl border-ocean-bright/20 flex flex-col justify-between space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-ocean-bright/20 flex items-center justify-center text-ocean-bright text-xl">
+                            <i class="fa-solid fa-fish"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif font-bold text-lg text-ocean-bright">Balıklar & Ayçiçekleri 🐠🌻</h3>
+                            <p class="text-xs text-gray-300 mt-2 leading-relaxed">
+                                Denizlerin derinliklerindeki balıklara olan sevgin, yüzünü her zaman güneşe dönen ayçiçekleri gibi enerjinle etrafını aydınlatman...
+                            </p>
+                        </div>
+                        <span class="text-[10px] text-ocean-light italic">#OceanLover #SunflowerEnergy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIVE TIME COUNTER SECTION -->
+        <section id="time-counter" class="glass-card rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden border-sunflower/20 glow-effect">
+            <div class="space-y-3 mb-8">
+                <div class="text-leaf-light font-semibold text-sm tracking-wider uppercase">
+                    <i class="fa-solid fa-calendar-heart mr-2"></i>İlk Buluşmamızdan (1 Nisan) Beri
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white">Birlikte Geçen Her Anımız</h2>
+                <p class="text-xs sm:text-sm text-gray-300">Sevginle hayatıma anlam kattığın o özel günden beri geçen süre:</p>
+            </div>
+
+            <!-- Counter Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4 max-w-4xl mx-auto">
+                <div class="glass-card p-3 sm:p-4 rounded-2xl border-white/10 flex flex-col justify-center">
+                    <span id="cnt-years" class="text-2xl sm:text-4xl font-bold text-sunflower font-serif">0</span>
+                    <span class="text-xs text-gray-300 mt-1 uppercase font-medium">Yıl</span>
+                </div>
+                <div class="glass-card p-3 sm:p-4 rounded-2xl border-white/10 flex flex-col justify-center">
+                    <span id="cnt-months" class="text-2xl sm:text-4xl font-bold text-sunflower font-serif">0</span>
+                    <span class="text-xs text-gray-300 mt-1 uppercase font-medium">Ay</span>
+                </div>
+                <div class="glass-card p-3 sm:p-4 rounded-2xl border-white/10 flex flex-col justify-center">
+                    <span id="cnt-days" class="text-2xl sm:text-4xl font-bold text-sunflower font-serif">0</span>
+                    <span class="text-xs text-gray-300 mt-1 uppercase font-medium">Gün</span>
+                </div>
+                <div class="glass-card p-3 sm:p-4 rounded-2xl border-white/10 flex flex-col justify-center">
+                    <span id="cnt-hours" class="text-2xl sm:text-4xl font-bold text-ocean-light font-serif">0</span>
+                    <span class="text-xs text-gray-300 mt-1 uppercase font-medium">Saat</span>
+                </div>
+                <div class="glass-card p-3 sm:p-4 rounded-2xl border-white/10 flex flex-col justify-center">
+                    <span id="cnt-minutes" class="text-2xl sm:text-4xl font-bold text-ocean-light font-serif">0</span>
+                    <span class="text-xs text-gray-300 mt-1 uppercase font-medium">Dakika</span>
+                </div>
+                <div class="glass-card p-3 sm:p-4 rounded-2xl border-white/10 flex flex-col justify-center bg-leaf/10 border-leaf/30">
+                    <span id="cnt-seconds" class="text-2xl sm:text-4xl font-bold text-leaf-light font-serif">0</span>
+                    <span class="text-xs text-leaf-light mt-1 uppercase font-medium">Saniye</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE QUIZ & HEART EXPLOSION SECTION -->
+        <section id="quiz-section" class="glass-card rounded-3xl p-6 sm:p-10 text-center relative overflow-hidden border-leaf/30">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <div class="w-16 h-16 bg-leaf/20 rounded-full flex items-center justify-center mx-auto text-leaf-light text-2xl border border-leaf/30">
+                    <i class="fa-solid fa-heart-circle-check"></i>
+                </div>
+
+                <span class="text-sunflower text-xs font-semibold tracking-widest uppercase">Aşk Testi & Soru Köşesi</span>
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white">Küçük Bir Sorum Var! ❓</h2>
+                <p class="text-sm text-gray-300">"Dünyanın en mücadeleci, iklim ve çocuk hakları savunucusu, gözleri en güzel değişim elçisi kimdir?"</p>
+
+                <!-- Options -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                    <button onclick="handleQuizAnswer(false)" class="p-4 rounded-2xl glass-card hover:bg-white/10 border-white/10 text-sm font-medium transition-all hover:scale-105 active:scale-95">
+                        A) Greta Thunberg 🌍
+                    </button>
+                    <button onclick="handleQuizAnswer(true)" class="p-4 rounded-2xl bg-gradient-to-r from-sunflower/20 to-leaf/20 hover:from-sunflower/40 hover:to-leaf/40 border border-sunflower/40 text-sunflower font-bold text-base transition-all hover:scale-105 active:scale-95 shadow-md">
+                        B) Helin'im (Benim Sevgilim) ❤️🌻
+                    </button>
+                    <button onclick="handleQuizAnswer(false)" class="p-4 rounded-2xl glass-card hover:bg-white/10 border-white/10 text-sm font-medium transition-all hover:scale-105 active:scale-95">
+                        C) Birleşmiş Milletler Başkanı 🇺🇳
+                    </button>
+                </div>
+
+                <div id="quiz-feedback" class="hidden p-4 rounded-2xl bg-sunflower/20 border border-sunflower/40 text-sunflower font-serif text-lg font-bold animate-pulse">
+                    🎉 DOĞRU CEVAP! Sen benim her şeyimsin Helin! ❤️✨
+                </div>
+            </div>
+        </section>
+
+        <!-- MINI SUDOKU PUZZLE SECTION FOR HELIN -->
+        <section class="glass-card rounded-3xl p-6 sm:p-8 relative overflow-hidden border-sunflower/30 max-w-xl mx-auto">
+            <div class="text-center space-y-2 mb-6">
+                <span class="text-sunflower text-xs font-semibold tracking-widest uppercase">Sudoku Sevgine Özel</span>
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white flex items-center justify-center gap-2">
+                    Helin'in Mini Sudoku'su 🧩
+                </h2>
+                <p class="text-xs text-ocean-light">Sudokuya bayıldığını bildiğim için sana özel 4x4 minik bir bulmaca hazırladım! Eksik rakamları (1-4) doldur ve sürprizi gör.</p>
+            </div>
+
+            <!-- 4x4 Grid -->
+            <div class="grid grid-cols-4 gap-2 max-w-[280px] mx-auto p-3 bg-ocean-deep/80 rounded-2xl border border-white/20">
+                <!-- Row 1 -->
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">1</div>
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">2</div>
+                <input id="sudoku-0-2" type="number" min="1" max="4" placeholder="?" class="w-14 h-14 rounded-xl bg-ocean-navy text-center font-bold text-lg text-white focus:outline-none focus:border-sunflower border border-white/20">
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">4</div>
+
+                <!-- Row 2 -->
+                <input id="sudoku-1-0" type="number" min="1" max="4" placeholder="?" class="w-14 h-14 rounded-xl bg-ocean-navy text-center font-bold text-lg text-white focus:outline-none focus:border-sunflower border border-white/20">
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">4</div>
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">1</div>
+                <input id="sudoku-1-3" type="number" min="1" max="4" placeholder="?" class="w-14 h-14 rounded-xl bg-ocean-navy text-center font-bold text-lg text-white focus:outline-none focus:border-sunflower border border-white/20">
+
+                <!-- Row 3 -->
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">4</div>
+                <input id="sudoku-2-1" type="number" min="1" max="4" placeholder="?" class="w-14 h-14 rounded-xl bg-ocean-navy text-center font-bold text-lg text-white focus:outline-none focus:border-sunflower border border-white/20">
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">2</div>
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">3</div>
+
+                <!-- Row 4 -->
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">2</div>
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">1</div>
+                <input id="sudoku-3-2" type="number" min="1" max="4" placeholder="?" class="w-14 h-14 rounded-xl bg-ocean-navy text-center font-bold text-lg text-white focus:outline-none focus:border-sunflower border border-white/20">
+                <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center font-bold text-lg text-sunflower">1</div>
+            </div>
+
+            <div class="text-center pt-5">
+                <button onclick="checkSudokuSolution()" class="px-6 py-2.5 rounded-full bg-leaf text-ocean-deep font-bold text-sm shadow-md hover:brightness-110 active:scale-95 transition-all">
+                    Bulmacayı Kontrol Et ✨
+                </button>
+            </div>
+
+            <div id="sudoku-result" class="hidden mt-4 p-4 rounded-2xl bg-sunflower/20 border border-sunflower/40 text-center space-y-1">
+                <p class="font-serif font-bold text-sunflower text-base">🎉 HARİKASIN! TEBRİKLER!</p>
+                <p class="text-xs text-white">Sudoku kraliçem yine döktürdü! Tıpkı bu bulmaca gibi hayatımın eksik parçalarını da senin sevgin tamamlıyor. ❤️</p>
+            </div>
+        </section>
+
+        <!-- SPECIAL MILESTONES & MEMORIES GALERY -->
+        <section id="memories" class="space-y-8">
+            <div class="text-center space-y-2">
+                <span class="text-sunflower text-sm font-semibold tracking-widest uppercase">Anı Çizelgemiz</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-gradient-gold">Unutulmaz İlklerimiz</h2>
+                <p class="text-sm text-ocean-light max-w-lg mx-auto">Hayatımda bıraktığın en derin ve en tatlı izlerin hikayesi.</p>
+            </div>
+
+            <!-- Memory Cards Grid -->
+            <div id="memory-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Rendered dynamically -->
+            </div>
+        </section>
+
+        <!-- RANDOM SECRET LOVE NOTES (SIR KUTUSU) -->
+        <section class="glass-card rounded-3xl p-6 sm:p-10 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-sunflower via-leaf to-ocean-bright"></div>
+            
+            <div class="max-w-2xl mx-auto space-y-6">
+                <div class="w-16 h-16 bg-sunflower/20 rounded-full flex items-center justify-center mx-auto text-sunflower text-2xl border border-sunflower/30">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white">Helin'e Özel Sır Kutusu 💌</h2>
+                <p class="text-xs sm:text-sm text-gray-300">Aşağıdaki butona her bastığında sana kalbimden geçen minik bir not çıkacak:</p>
+
+                <div id="secret-note-box" class="min-h-[110px] glass-card p-6 rounded-2xl flex items-center justify-center border-white/20 transition-all duration-300">
+                    <p id="secret-note-text" class="text-base sm:text-lg font-serif italic text-sunflower leading-relaxed">
+                        "Butona tıkla ve sana hazırladığım ilk sürpriz notu oku... ✨"
+                    </p>
+                </div>
+
+                <button onclick="revealRandomNote()" class="px-6 py-3 rounded-full bg-gradient-to-r from-leaf to-leaf-light text-ocean-deep font-semibold shadow-lg hover:brightness-110 active:scale-95 transition-all flex items-center gap-2 mx-auto">
+                    <i class="fa-solid fa-dice text-ocean-deep"></i> Yeni Bir Not Aç
+                </button>
+            </div>
+        </section>
+
+        <!-- OUR FUTURE BUCKET LIST -->
+        <section class="space-y-6">
+            <div class="text-center space-y-2">
+                <span class="text-leaf-light text-sm font-semibold tracking-widest uppercase">Geleceğe Dair</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white">Birlikte Hayal Ettiklerimiz ✨</h2>
+                <p class="text-sm text-ocean-light">Seninle yapmak istediğim şeylerin listesi. Tamamladıkça üzerini çizebiliriz!</p>
+            </div>
+
+            <div class="glass-card rounded-3xl p-6 sm:p-8 max-w-3xl mx-auto space-y-3" id="bucket-list-container">
+                <!-- Rendered dynamically -->
+            </div>
+        </section>
+
+        <!-- RETRO MUSIC PLAYER CARD -->
+        <section class="glass-card rounded-3xl p-6 sm:p-8 max-w-xl mx-auto text-center space-y-6 border-ocean-bright/30">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-sunflower/20 flex items-center justify-center text-sunflower">
+                        <i class="fa-solid fa-compact-disc animate-spin" style="animation-duration: 8s;"></i>
+                    </div>
+                    <div class="text-left">
+                        <h3 class="font-serif font-bold text-white text-base">Bizim Şarkı Listemiz</h3>
+                        <p class="text-xs text-ocean-light">Helin & Ben • Özel Çalma Listesi</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-leaf/20 text-leaf-light px-2.5 py-1 rounded-full border border-leaf/30">Romantik Mod</span>
+            </div>
+
+            <!-- Fake Vinyl Display -->
+            <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto rounded-full bg-black border-4 border-gray-800 shadow-2xl flex items-center justify-center overflow-hidden">
+                <div id="vinyl-disc" class="w-full h-full rounded-full bg-gradient-to-tr from-gray-900 via-gray-800 to-black flex items-center justify-center transition-all duration-700">
+                    <div class="w-12 h-12 rounded-full bg-sunflower border-4 border-ocean-deep flex items-center justify-center">
+                        <div class="w-3 h-3 rounded-full bg-ocean-deep"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Track Info & Controls -->
+            <div class="space-y-2">
+                <h4 id="current-song-title" class="font-semibold text-lg text-sunflower">Aşkın En Tatlı Hali</h4>
+                <p id="current-song-artist" class="text-xs text-gray-300">Sana Özel Şarkımız</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden cursor-pointer" onclick="seekAudio(event)">
+                <div id="audio-progress" class="bg-gradient-to-r from-sunflower to-ocean-bright h-full w-1/3 transition-all"></div>
+            </div>
+
+            <div class="flex items-center justify-center gap-6 pt-2">
+                <button onclick="prevTrack()" class="text-gray-300 hover:text-white transition-all text-xl">
+                    <i class="fa-solid fa-backward-step"></i>
+                </button>
+                <button onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-sunflower text-ocean-deep flex items-center justify-center text-xl font-bold hover:scale-105 transition-all shadow-lg">
+                    <i id="player-play-icon" class="fa-solid fa-play ml-0.5"></i>
+                </button>
+                <button onclick="nextTrack()" class="text-gray-300 hover:text-white transition-all text-xl">
+                    <i class="fa-solid fa-forward-step"></i>
+                </button>
+            </div>
+
+            <audio id="audio-player" loop preload="metadata">
+                <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-acoustic-guitar-112349.mp3" type="audio/mpeg">
+            </audio>
+        </section>
+
+        <!-- FOOTER LOVE MESSAGE -->
+        <footer class="text-center space-y-4 py-8 border-t border-white/10">
+            <p class="font-serif italic text-lg text-sunflower">
+                "COP sahnesinde dünyayı değiştiren cesaretin, gözlerindeki ışık ve kalbindeki iyilikle sen benim her şeyimsin..."
+            </p>
+            <p class="text-xs text-ocean-light">
+                Bu site, dünyadaki en harika sevgili <strong class="text-white">Helin</strong> için sonsuz sevgiyle kodlandı. 🌻❤️🐠
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- EDIT MODAL (CUSTOMIZATION) -->
+    <div id="edit-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 space-y-6 border-sunflower/30">
+            <div class="flex justify-between items-center border-b border-white/10 pb-4">
+                <h3 class="text-xl font-serif font-bold text-sunflower flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i> Site İçeriğini Düzenle
+                </h3>
+                <button onclick="closeEditModal()" class="text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <p class="text-xs text-ocean-light">
+                Buradan anılarınızın başlıklarını, açıklamalarını ve fotoğraf bağlantılarını değiştirebilirsin.
+            </p>
+
+            <div id="modal-memory-inputs" class="space-y-6"></div>
+
+            <div class="flex justify-end gap-3 pt-4 border-t border-white/10">
+                <button onclick="closeEditModal()" class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-sm font-medium">İptal</button>
+                <button onclick="saveCustomizations()" class="px-5 py-2.5 rounded-full bg-sunflower text-ocean-deep hover:brightness-110 text-sm font-bold shadow-lg">Kaydet ve Uygula</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================
+           1. DATA STRUCTURE (INITIAL MEMORIES & NOTES)
+           ========================================== */
+        const defaultMemories = [
+            {
+                id: 'first-date',
+                title: 'İlk Buluşmamız ❤️',
+                date: '1 Nisan',
+                desc: 'Gözlerinin içine bakıp saatlerin nasıl geçtiğini anlamadığım, hayatımın en heyecanlı ve güzel günü.',
+                img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'first-drive',
+                title: 'İlk Beraber Araba Sürüşümüz 🚗',
+                date: 'Unutulmaz An',
+                desc: 'Direksiyonda ben, yanımda sen... Yan koltuğumda dünyayı değiştirecek en güzel yol arkadaşı vardı.',
+                img: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'first-out-car',
+                title: 'Araba İle İlk Dışarı Çıkışımız 🌟',
+                date: 'Özel Gece',
+                desc: 'Müziğin sesini açıp, yolları rastgele takip ettiğimiz o tatlı özgürlük hissi.',
+                img: 'https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'first-swim',
+                title: 'Birlikte İlk Yüzüşümüz 🌊',
+                date: 'Balıklar & Mavi',
+                desc: 'Çok sevdiğin balıklar gibi maviliklerin içinde gülüşmek ve serinlemek...',
+                img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'first-gift',
+                title: 'İlk Hediyeleşmemiz 🎁',
+                date: 'Anlamlı Dokunuş',
+                desc: 'Verdiğimiz küçük bir hediyenin arkasındaki kocaman sevgi ve o anki gözlerindeki ayçiçeği gibi açan ışık.',
+                img: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'first-bday',
+                title: 'İlk Doğum Günümüz 🎂',
+                date: 'Kutlama Günü',
+                desc: 'Yeni bir yaşı birlikte karşılamak, dilek dilerken yanında olmak tarifsiz bir mutluğdu.',
+                img: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80'
+            }
+        ];
+
+        const secretNotes = [
+            "Gülüşün, ayçiçeklerinin güneşe döndüğü gibi içimi aydınlatıyor. ✨🌻",
+            "COP konferansındaki o konuşmanı dinlerken gururdan gözlerim dolacak, eminim!",
+            "TEGV'de çocuklara verdiklerin, kadın sağlığı için mücadeleden hiç vazgeçmeyişin... Seni sevmek harika bir duygu.",
+            "Sudoku çözerken takındığın o tatlı odaklanmış bakışına bayılıyorum!",
+            "Denizdeki balıklar kadar özgür, ayçiçekleri kadar canlı ve neşelisin.",
+            "İyi ki 1 Nisan'da o ilk adımı attık, iyi ki hayatımdasın benim ilham kaynağım!"
+        ];
+
+        const bucketListItems = [
+            { id: 1, text: "COP Konferansı konuşmandan sonra sana sarılıp tebrik etmek", checked: false },
+            { id: 2, text: "Birlikte dev bir akvaryum / deniz canlıları müzesi gezmek", checked: true },
+            { id: 3, text: "Ayçiçeği tarlalarının ortasında gün batımında fotoğraf çekilmek", checked: false },
+            { id: 4, text: "Gözlerden uzak bir koyda balıklarla birlikte yüzmek", checked: true },
+            { id: 5, text: "Pazar sabahları kahve eşliğinde zorlu Sudokular çözmek", checked: false }
+        ];
+
+        let memories = [...defaultMemories];
+
+        /* ==========================================
+           2. LIVE TIMER LOGIC (1 April Counter)
+           ========================================== */
+        function getStartDate() {
+            const now = new Date();
+            let start = new Date(now.getFullYear(), 3, 1, 0, 0, 0);
+            if (now < start) {
+                start = new Date(now.getFullYear() - 1, 3, 1, 0, 0, 0);
+            }
+            return start;
+        }
+
+        const startDate = getStartDate();
+
+        function updateLiveCounter() {
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - startDate) / 1000);
+            if (diffInSeconds < 0) return;
+
+            const years = Math.floor(diffInSeconds / (365.25 * 24 * 3600));
+            const remAfterYears = diffInSeconds % (365.25 * 24 * 3600);
+            
+            const months = Math.floor(remAfterYears / (30.44 * 24 * 3600));
+            const remAfterMonths = remAfterYears % (30.44 * 24 * 3600);
+            
+            const days = Math.floor(remAfterMonths / (24 * 3600));
+            const remAfterDays = remAfterMonths % (24 * 3600);
+
+            const hours = Math.floor(remAfterDays / 3600);
+            const remAfterHours = remAfterDays % 3600;
+
+            const minutes = Math.floor(remAfterHours / 60);
+            const seconds = remAfterHours % 60;
+
+            document.getElementById('cnt-years').innerText = years;
+            document.getElementById('cnt-months').innerText = months;
+            document.getElementById('cnt-days').innerText = days;
+            document.getElementById('cnt-hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('cnt-minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('cnt-seconds').innerText = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateLiveCounter, 1000);
+        updateLiveCounter();
+
+        /* ==========================================
+           3. QUIZ & SUDOKU LOGIC
+           ========================================== */
+        function handleQuizAnswer(isCorrect) {
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+
+            if (isCorrect) {
+                // Heart explosion & confetti
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ffb703', '#ff0055', '#2a9d8f', '#ffffff']
+                });
+
+                // Spawn floating hearts burst
+                for(let i=0; i<30; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'fixed text-3xl pointer-events-none z-50 animate-bounce';
+                        heart.innerText = ['❤️', '💖', '🌻', '🐠'][Math.floor(Math.random()*4)];
+                        heart.style.left = Math.random() * 90 + 'vw';
+                        heart.style.top = Math.random() * 80 + 'vh';
+                        document.body.appendChild(heart);
+                        setTimeout(() => heart.remove(), 2500);
+                    }, i * 60);
+                }
+            }
+        }
+
+        function checkSudokuSolution() {
+            // Expected answers: sudoku-0-2 = 3, sudoku-1-0 = 3, sudoku-1-3 = 2, sudoku-2-1 = 1, sudoku-3-2 = 4
+            const val1 = document.getElementById('sudoku-0-2').value;
+            const val2 = document.getElementById('sudoku-1-0').value;
+            const val3 = document.getElementById('sudoku-1-3').value;
+            const val4 = document.getElementById('sudoku-2-1').value;
+            const val5 = document.getElementById('sudoku-3-2').value;
+
+            if (val1 == '3' && val2 == '3' && val3 == '2' && val4 == '1' && val5 == '4') {
+                document.getElementById('sudoku-result').classList.remove('hidden');
+                confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 } });
+            } else {
+                alert("Ufak bir yanlışlık var gibi kraliçem! Bir daha göz at istersen 🧩❤️");
+            }
+        }
+
+        /* ==========================================
+           4. RENDER FUNCTIONS & INITIALIZATION
+           ========================================== */
+        function renderMemories() {
+            const container = document.getElementById('memory-cards-container');
+            container.innerHTML = '';
+
+            memories.forEach(mem => {
+                const card = document.createElement('div');
+                card.className = 'glass-card glass-card-hover rounded-3xl overflow-hidden flex flex-col border-white/10 group';
+                card.innerHTML = `
+                    <div class="relative h-48 sm:h-52 w-full overflow-hidden bg-ocean-deep">
+                        <img src="${mem.img}" alt="${mem.title}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80'" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-deep via-transparent to-transparent"></div>
+                        <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-sunflower text-ocean-deep shadow">
+                            ${mem.date}
+                        </span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                        <div>
+                            <h3 class="text-xl font-serif font-bold text-white group-hover:text-sunflower transition-colors">${mem.title}</h3>
+                            <p class="text-xs sm:text-sm text-gray-300 mt-2 leading-relaxed">${mem.desc}</p>
+                        </div>
+                        <div class="pt-2 flex items-center text-xs text-leaf-light font-medium">
+                            <i class="fa-solid fa-heart text-sunflower mr-1.5"></i> Unutulmaz Bir Anı
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderBucketList() {
+            const container = document.getElementById('bucket-list-container');
+            container.innerHTML = '';
+
+            bucketListItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `flex items-center justify-between p-3.5 rounded-2xl transition-all cursor-pointer border ${item.checked ? 'bg-leaf/10 border-leaf/30 text-gray-300' : 'bg-white/5 border-white/10 hover:bg-white/10 text-white'}`;
+                div.onclick = () => {
+                    item.checked = !item.checked;
+                    renderBucketList();
+                };
+
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-lg flex items-center justify-center text-xs ${item.checked ? 'bg-leaf text-ocean-deep' : 'border border-white/30 text-transparent'}">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="text-sm sm:text-base ${item.checked ? 'line-through text-gray-400' : 'font-medium'}">${item.text}</span>
+                    </div>
+                    <i class="fa-solid ${item.checked ? 'fa-heart text-leaf-light' : 'fa-star text-sunflower/40'} text-xs"></i>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        let lastNoteIndex = -1;
+        function revealRandomNote() {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * secretNotes.length);
+            } while (randomIndex === lastNoteIndex && secretNotes.length > 1);
+
+            lastNoteIndex = randomIndex;
+            const noteBox = document.getElementById('secret-note-box');
+            const noteText = document.getElementById('secret-note-text');
+
+            noteBox.classList.add('opacity-0', 'scale-95');
+
+            setTimeout(() => {
+                noteText.innerText = `"${secretNotes[randomIndex]}"`;
+                noteBox.classList.remove('opacity-0', 'scale-95');
+                noteBox.classList.add('opacity-100', 'scale-100');
+            }, 200);
+        }
+
+        const audio = document.getElementById('audio-player');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            const btnText = document.getElementById('music-text');
+            const musicIcon = document.getElementById('music-icon');
+            const playerIcon = document.getElementById('player-play-icon');
+            const vinyl = document.getElementById('vinyl-disc');
+
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                btnText.innerText = 'Müziği Başlat';
+                musicIcon.className = 'fa-solid fa-music text-sunflower';
+                playerIcon.className = 'fa-solid fa-play ml-0.5';
+                vinyl.classList.remove('animate-spin');
+            } else {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    btnText.innerText = 'Müzik Çalıyor';
+                    musicIcon.className = 'fa-solid fa-compact-disc text-sunflower animate-spin';
+                    playerIcon.className = 'fa-solid fa-pause';
+                    vinyl.classList.add('animate-spin');
+                }).catch(e => console.log(e));
+            }
+        }
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const pct = (audio.currentTime / audio.duration) * 100;
+                document.getElementById('audio-progress').style.width = `${pct}%`;
+            }
+        });
+
+        function seekAudio(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            if (audio.duration) {
+                audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+            }
+        }
+
+        function prevTrack() { audio.currentTime = 0; }
+        function nextTrack() { revealRandomNote(); audio.currentTime = 0; }
+
+        function createHeartParticles() {
+            const container = document.getElementById('hearts-container');
+            const icons = ['❤️', '🌻', '✨', '🐠', '🌊'];
+
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${6 + Math.random() * 6}s`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                heart.style.fontSize = `${14 + Math.random() * 16}px`;
+                container.appendChild(heart);
+            }
+        }
+
+        function openEditModal() {
+            const container = document.getElementById('modal-memory-inputs');
+            container.innerHTML = '';
+
+            memories.forEach((mem, index) => {
+                const group = document.createElement('div');
+                group.className = 'p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3';
+                group.innerHTML = `
+                    <h4 class="text-sm font-semibold text-sunflower">${mem.title}</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-xs text-gray-300 block mb-1">Açıklama</label>
+                            <input type="text" id="input-desc-${index}" value="${mem.desc}" 
+                                   class="w-full bg-ocean-deep border border-white/20 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-sunflower" />
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-300 block mb-1">Fotoğraf URL'si</label>
+                            <input type="text" id="input-img-${index}" value="${mem.img}" 
+                                   class="w-full bg-ocean-deep border border-white/20 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-sunflower" />
+                        </div>
+                    </div>
+                `;
+                container.appendChild(group);
+            });
+
+            document.getElementById('edit-modal').classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+        }
+
+        function saveCustomizations() {
+            memories.forEach((mem, index) => {
+                const newDesc = document.getElementById(`input-desc-${index}`).value;
+                const newImg = document.getElementById(`input-img-${index}`).value;
+                if (newDesc) mem.desc = newDesc;
+                if (newImg) mem.img = newImg;
+            });
+
+            localStorage.setItem('helin_site_memories_v2', JSON.stringify(memories));
+            renderMemories();
+            closeEditModal();
+        }
+
+        function loadStoredData() {
+            const stored = localStorage.getItem('helin_site_memories_v2');
+            if (stored) {
+                try { memories = JSON.parse(stored); } catch (e) {}
+            }
+        }
+
+        window.onload = function() {
+            loadStoredData();
+            renderMemories();
+            renderBucketList();
+            createHeartParticles();
+        };
+    </script>
+</body>
+</html>
