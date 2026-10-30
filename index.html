@@ -248,13 +248,13 @@
             <div class="space-y-6">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
                     <div>
-                        <span class="text-sunflower text-xs font-semibold tracking-widest uppercase">Benim İlham Kaynağım</span>
+                        <span class="text-sunflower text-xs font-semibold tracking-widest uppercase">Benim Bilinçli Elçim</span>
                         <h2 class="text-2xl sm:text-4xl font-serif font-bold text-white flex items-center gap-2 mt-1">
                             Değişim Elçim Helin ✨ 🌍
                         </h2>
                     </div>
                     <span class="px-4 py-1.5 rounded-full bg-leaf/20 border border-leaf/40 text-leaf-light text-xs font-semibold flex items-center gap-1.5">
-                        <i class="fa-solid fa-seedling"></i> İklim & Kadın Sağlığı Savunucusu
+                        <i class="fa-solid fa-seedling"></i> İklim Krizi'nin Önemini Seninle Öğrendim
                     </span>
                 </div>
 
@@ -265,9 +265,9 @@
                             <i class="fa-solid fa-bullhorn"></i>
                         </div>
                         <div>
-                            <h3 class="font-serif font-bold text-lg text-sunflower">COP Konferansı Konuşmacısı 🎙️</h3>
+                            <h3 class="font-serif font-bold text-lg text-sunflower">COP Konferansı Konuşmacısı Rolün 🎙️</h3>
                             <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-                                Küresel iklim krizine karşı sesini uluslararası sahnede, COP konferansında duyuracak kadar cesur ve yetenekli! Seninle sonsuz gurur duyuyorum.
+                                Küresel iklim krizine karşı sesini duyurmak için uluslararası COP konferansında rol alacaksın. Üniversite'de hiç kimse senin gösterdiğin çabayı göstermiyor. Çaban çok eşsiz hayatım. Seninle sonsuz gurur duyuyorum.
                             </p>
                         </div>
                         <span class="text-[10px] text-ocean-light italic">#ClimateAction #YouthLeader</span>
@@ -279,12 +279,12 @@
                             <i class="fa-solid fa-hand-holding-heart"></i>
                         </div>
                         <div>
-                            <h3 class="font-serif font-bold text-lg text-leaf-light">TEGV Gönüllüsü & Kadın Sağlığı 💚</h3>
+                            <h3 class="font-serif font-bold text-lg text-leaf-light">TEGV Gönüllüm 💚</h3>
                             <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-                                Çocukların geleceğine dokunan, kadın sağlığı ve eşitlik için yorulmadan mücadele eden altın gibi bir kalp...
+                                Çocukların geleceğine dokunan, onların eğitiminde rol almak için gönüllü olan tek tanıdığım kişisin. Deniko'nun ve çocukların seni neden çok secdiğini anlayabiliyorum bebii
                             </p>
                         </div>
-                        <span class="text-[10px] text-ocean-light italic">#TEGV #KadınSağlığı #Gönüllülük</span>
+                        <span class="text-[10px] text-ocean-light italic">#TEGV #Gönüllülük</span>
                     </div>
 
                     <!-- Ocean & Sunflowers Love -->
@@ -295,7 +295,7 @@
                         <div>
                             <h3 class="font-serif font-bold text-lg text-ocean-bright">Balıklar & Ayçiçekleri 🐠🌻</h3>
                             <p class="text-xs text-gray-300 mt-2 leading-relaxed">
-                                Denizlerin derinliklerindeki balıklara olan sevgin, yüzünü her zaman güneşe dönen ayçiçekleri gibi enerjinle etrafını aydınlatman...
+                                Denizlerin derinliklerindeki balıklara olan sevgin, yüzünü her zaman güneşe dönen ayçiçekleri. Çiçekçinin hikayesini unutmadım. O balık ise bana charm'ı hatırlatıyor. 
                             </p>
                         </div>
                         <span class="text-[10px] text-ocean-light italic">#OceanLover #SunflowerEnergy</span>
@@ -664,7 +664,7 @@
             </div>
 
             <p class="text-xs text-ocean-light">
-                Buradan anılarınızın başlıklarını, açıklamalarını ve fotoğraf bağlantılarını değiştirebilirsin.
+                Buradan anılarınızın başlıklarını, açıklamalarını ve fotoğraf bağlantılarını değiştirebilirsin. Fotoğraf kutusu boş kalırsa mevcut fotoğraf korunur.
             </p>
 
             <div id="modal-memory-inputs" class="space-y-6"></div>
@@ -681,48 +681,56 @@
         /* ==========================================
            1. DATA STRUCTURE (INITIAL MEMORIES & NOTES)
            ========================================== */
+        /* Fotoğraflar img/ klasöründen yüklenir.
+           pos: kartta fotoğrafın hangi kısmının görüneceği (yüzler kesilmesin diye) */
         const defaultMemories = [
             {
                 id: 'first-date',
                 title: 'İlk Buluşmamız ❤️',
                 date: '1 Nisan',
                 desc: 'Gözlerinin içine bakıp saatlerin nasıl geçtiğini anlamadığım, hayatımın en heyecanlı ve güzel günü.',
-                img: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80'
+                img: 'img/first-date.jpg',
+                pos: 'center 35%'
             },
             {
                 id: 'first-drive',
                 title: 'İlk Beraber Araba Sürüşümüz 🚗',
                 date: 'Unutulmaz An',
-                desc: 'Direksiyonda ben, yanımda sen... Yan koltuğumda dünyayı değiştirecek en güzel yol arkadaşı vardı.',
-                img: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80'
+                desc: 'Direksiyonda sen, yanında ben... O kadar güzel bir gündü ki. Beraber kent ormanında pizza da yemiştik. Arabayı çok güzel sürüyorsun hayatım ve çok geliştinnnn.',
+                img: 'img/first-drive.jpg',
+                pos: 'center 45%'
             },
             {
                 id: 'first-out-car',
                 title: 'Araba İle İlk Dışarı Çıkışımız 🌟',
                 date: 'Özel Gece',
-                desc: 'Müziğin sesini açıp, yolları rastgele takip ettiğimiz o tatlı özgürlük hissi.',
-                img: 'https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&w=800&q=80'
+                desc: 'Müziğin sesini açıp, yolları lara plajına sürdüğümüz o özgürlük hissi.',
+                img: 'img/first-out-car.jpg',
+                pos: 'center 45%'
             },
             {
                 id: 'first-swim',
                 title: 'Birlikte İlk Yüzüşümüz 🌊',
                 date: 'Balıklar & Mavi',
-                desc: 'Çok sevdiğin balıklar gibi maviliklerin içinde gülüşmek ve serinlemek...',
-                img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
+                desc: 'Maviliklerin içinde gülüşmek ve serinlemek... En güzeli ise sevgilimin yanımda olması',
+                img: 'img/first-swim.jpg',
+                pos: 'center 40%'
             },
             {
                 id: 'first-gift',
                 title: 'İlk Hediyeleşmemiz 🎁',
                 date: 'Anlamlı Dokunuş',
-                desc: 'Verdiğimiz küçük bir hediyenin arkasındaki kocaman sevgi ve o anki gözlerindeki ayçiçeği gibi açan ışık.',
-                img: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=800&q=80'
+                desc: 'Verdiğim ilk hediye aslında o penguendi. Penguuuuuu. Seni seviyorum',
+                img: 'img/first-gift.jpg',
+                pos: 'center 30%'
             },
             {
                 id: 'first-bday',
                 title: 'İlk Doğum Günümüz 🎂',
                 date: 'Kutlama Günü',
-                desc: 'Yeni bir yaşı birlikte karşılamak, dilek dilerken yanında olmak tarifsiz bir mutluğdu.',
-                img: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=800&q=80'
+                desc: 'Her ne kadar doğum gününde Antalyada olsam bile, geldiğin zaman elimden gelen en güzel doğum gününü kutlamaya çalıştım bebi. Seneye daha iyi şekilde kutlayacağımmm',
+                img: 'img/first-bday.jpg',
+                pos: 'center 55%'
             }
         ];
 
@@ -744,7 +752,7 @@
     { id: 6, text: "Beraber kamp yapmak.", checked: false }
 ];
 
-        /* "Seni Seviyorum Helin. Çirkin'in Sana Çok Aşık." — 50 dilde
+        /* "Seni seviyorum Helin. Çirkin'in Sana Çok Aşık." — 50 dilde
            Her satır: [bayrak, dilin adı, metin, sağdan sola mı?] */
         const loveLanguages = [
             ['🇬🇧', 'İngilizce', "I love you, Helin. Your Çirkin is so in love with you."],
@@ -799,7 +807,7 @@
             ['🇦🇿', 'Azerice', "Səni sevirəm, Helin. Çirkinin sənə çox aşiqdir."]
         ];
 
-        let memories = [...defaultMemories];
+        let memories = defaultMemories.map(m => ({ ...m }));
 
         /* ==========================================
            2. LIVE TIMER LOGIC (1 April Counter)
@@ -953,11 +961,12 @@
                 const card = document.createElement('div');
                 card.className = 'glass-card glass-card-hover rounded-3xl overflow-hidden flex flex-col border-white/10 group';
                 card.innerHTML = `
-                    <div class="relative h-48 sm:h-52 w-full overflow-hidden bg-ocean-deep">
+                    <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-ocean-deep">
                         <img src="${mem.img}" alt="${mem.title}" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                             style="object-position: ${mem.pos || 'center'};"
                              onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80'" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-deep via-transparent to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-deep/80 via-transparent to-transparent"></div>
                         <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-sunflower text-ocean-deep shadow">
                             ${mem.date}
                         </span>
@@ -1085,17 +1094,18 @@ function revealRandomNote() {
             memories.forEach((mem, index) => {
                 const group = document.createElement('div');
                 group.className = 'p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3';
+                const imgVal = (mem.img || '').startsWith('data:') ? '' : mem.img;
                 group.innerHTML = `
                     <h4 class="text-sm font-semibold text-sunflower">${mem.title}</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label class="text-xs text-gray-300 block mb-1">Açıklama</label>
-                            <input type="text" id="input-desc-${index}" value="${mem.desc}" 
+                            <input type="text" id="input-desc-${index}" value="${mem.desc.replace(/"/g, '&quot;')}" 
                                    class="w-full bg-ocean-deep border border-white/20 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-sunflower" />
                         </div>
                         <div>
-                            <label class="text-xs text-gray-300 block mb-1">Fotoğraf URL'si</label>
-                            <input type="text" id="input-img-${index}" value="${mem.img}" 
+                            <label class="text-xs text-gray-300 block mb-1">Fotoğraf URL'si (boşsa mevcut kalır)</label>
+                            <input type="text" id="input-img-${index}" value="${imgVal}" placeholder="Mevcut fotoğraf korunuyor" 
                                    class="w-full bg-ocean-deep border border-white/20 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-sunflower" />
                         </div>
                     </div>
@@ -1110,24 +1120,38 @@ function revealRandomNote() {
             document.getElementById('edit-modal').classList.add('hidden');
         }
 
+        /* Sadece değişiklikler (açıklama + elle girilen foto URL'leri) saklanır;
+           gömülü fotoğraflar localStorage'a kopyalanmaz. */
         function saveCustomizations() {
+            const overrides = {};
             memories.forEach((mem, index) => {
                 const newDesc = document.getElementById(`input-desc-${index}`).value;
-                const newImg = document.getElementById(`input-img-${index}`).value;
+                const newImg = document.getElementById(`input-img-${index}`).value.trim();
                 if (newDesc) mem.desc = newDesc;
                 if (newImg) mem.img = newImg;
+                overrides[mem.id] = {
+                    desc: mem.desc,
+                    img: (mem.img || '').startsWith('data:') ? null : mem.img
+                };
             });
 
-            localStorage.setItem('helin_site_memories_v2', JSON.stringify(memories));
+            try { localStorage.setItem('helin_site_memories_v3', JSON.stringify(overrides)); } catch (e) {}
             renderMemories();
             closeEditModal();
         }
 
         function loadStoredData() {
-            const stored = localStorage.getItem('helin_site_memories_v2');
-            if (stored) {
-                try { memories = JSON.parse(stored); } catch (e) {}
-            }
+            try {
+                const stored = localStorage.getItem('helin_site_memories_v3');
+                if (!stored) return;
+                const overrides = JSON.parse(stored);
+                memories.forEach(mem => {
+                    const o = overrides[mem.id];
+                    if (!o) return;
+                    if (o.desc) mem.desc = o.desc;
+                    if (o.img) mem.img = o.img;
+                });
+            } catch (e) {}
         }
 
         window.onload = function() {
